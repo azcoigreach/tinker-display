@@ -1,0 +1,6 @@
+RPi.GPIO
+adafruit-blinka
+adafruit-circuitpython-rgb-display
+adafruit-circuitpython-minitft
+Pillow
+numpy
