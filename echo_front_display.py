@@ -50,7 +50,7 @@ def draw_display():
         draw.text((10, 30 + i*20), line, font=font, fill=color565(0, 255, 255))
 
     # Rotate the image 90 degrees clockwise
-    rotated_image = image.rotate(270, expand=True)
+    rotated_image = image.rotate(90)
 
     # Display the rotated image
     display.image(rotated_image)
