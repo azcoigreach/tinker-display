@@ -33,7 +33,7 @@ menu_json = """
   "Main Menu": [
     {
       "text": "Deploy HomeLab",
-      "command": "P4wnP1_cli template deploy --full 'HomeLab'"
+      "command": "P4wnP1_cli template deploy --full HomeLab"
     },
     {
       "text": "Deploy Payload",
@@ -102,7 +102,7 @@ menu_json = """
         },
         {
           "text": "Shutdown",
-          "command": "P4wnP1_cli system shutdown'"
+          "command": "P4wnP1_cli system shutdown"
         }
       ]
     }
