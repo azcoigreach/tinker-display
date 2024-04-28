@@ -3,6 +3,7 @@ import time
 import subprocess
 import digitalio
 import board
+import json
 from PIL import Image, ImageDraw, ImageFont
 from adafruit_rgb_display import st7789
 
@@ -71,10 +72,23 @@ buttonB.switch_to_input(pull=digitalio.Pull.UP)
 
 # Menus
 menu_items = [
-    ("Network Scan", "P4wnP1_cli trigger send --group-name=scan --group-value=1"),
-    ("Deploy Payload", "P4wnP1_cli trigger send --group-name=payload --group-value=1"),
-    ("System Info", "P4wnP1_cli trigger send --group-name=info --group-value=1"),
-    ("Shutdown", "sudo shutdown now")
+    {
+        "text": "Network Scan",
+        "command": "P4wnP1_cli trigger send --group-name=scan --group-value=1"
+    },
+    {
+        "text": "Deploy Payload",
+        "command": "P4wnP1_cli trigger send --group-name=payload --group-value=1"
+    },
+    {
+        "text": "Utilities",
+        "submenu": [
+            {
+                "text": "Shutdown",
+                "command": "sudo shutdown now"
+            }
+        ]
+    }
 ]
 current_index = 0
 current_index = 0
