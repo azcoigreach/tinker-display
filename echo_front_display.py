@@ -11,7 +11,7 @@ reset_pin = None
 BAUDRATE = 64000000
 spi = board.SPI()
 
-disp = st7789.ST7789(
+display = st7789.ST7789(
     spi,
     cs=cs_pin,
     dc=dc_pin,
