@@ -19,8 +19,8 @@ display = st7789.ST7789(
     baudrate=BAUDRATE,
     width=135,
     height=240,
-    x_offset=0,
-    y_offset=0,
+    x_offset=53,
+    y_offset=40,
 )
 
 backlight = digitalio.DigitalInOut(board.D22)
@@ -42,13 +42,18 @@ except:
     print("Warning: DejaVu Mono font not found. Falling back to default font.")
 
 def draw_display():
+    # Set X
+    x = 0
+
     # Clear display
     image = Image.new("RGB", (display.width, display.height))
     draw = ImageDraw.Draw(image)
 
     # Draw each line of data
     for i, line in enumerate(data):
-        draw.text((10, 30 + i*20), line, font=font, fill=color565(0, 255, 255))
+        # getbox() returns a 2-tuple with the width and height of the text
+        y = font.getbbox(line)[1] * i
+        draw.text((x, y), line, font=font, fill=color565(0, 255, 255))
 
     # Rotate the image 90 degrees clockwise
     rotated_image = image.rotate(90)
