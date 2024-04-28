@@ -17,7 +17,7 @@ display = ST7789(
     rst=reset_pin,
     baudrate=BAUDRATE,
     width=240,
-    height=1350,
+    height=135,
     x_offset=0,
     y_offset=80,
 )
@@ -49,7 +49,7 @@ def draw_display():
         draw.text((10, 30 + i*20), line, font=font, fill=color565(0, 255, 255))
 
     # Rotate the image 90 degrees clockwise
-    rotated_image = image.rotate(180, expand=True)
+    rotated_image = image.rotate(270, expand=True)
 
     # Display the rotated image
     display.image(rotated_image)
