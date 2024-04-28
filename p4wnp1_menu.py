@@ -71,6 +71,18 @@ menu_json = """
             {
             "text": "Sub Menu Item 5",
             "command": "echo 'Sub Menu Item 5 selected'"
+            },
+            {
+            "text": "Sub Menu Item 6",
+            "command": "echo 'Sub Menu Item 6 selected'"
+            },
+            {
+            "text": "Sub Menu Item 7",
+            "command": "echo 'Sub Menu Item 7 selected'"
+            },
+            {
+            "text": "Sub Menu Item 8",
+            "command": "echo 'Sub Menu Item 8 selected'"
             }
         ]
     },
@@ -78,12 +90,12 @@ menu_json = """
       "text": "Utilities",
       "submenu": [
         {
-          "text": "Shutdown",
-          "command": "sudo shutdown now"
+          "text": "Reboot",
+          "command": "P4wnP1_cli system reboot"
         },
         {
-          "text": "Sub Menu Item 2",
-          "command": "echo 'Sub Menu Item 2 selected'"
+          "text": "Shutdown",
+          "command": "P4wnP1_cli system shutdown'"
         }
       ]
     }
