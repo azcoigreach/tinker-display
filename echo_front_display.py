@@ -52,7 +52,7 @@ def draw_display():
     # Draw each line of data
     for i, line in enumerate(data):
         # getbox() returns a 2-tuple with the width and height of the text
-        y = font.getbbox(line)[1] * i
+        y = font.getbbox(line)[3] * i
         draw.text((x, y), line, font=font, fill=color565(0, 255, 255))
 
     # Rotate the image 90 degrees clockwise
