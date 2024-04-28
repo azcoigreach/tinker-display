@@ -16,8 +16,8 @@ display = ST7789(
     dc=dc_pin,
     rst=reset_pin,
     baudrate=BAUDRATE,
-    width=240,
-    height=135,
+    width=135,
+    height=240,
     x_offset=0,
     y_offset=80,
 )
