@@ -18,6 +18,7 @@ buttonA = digitalio.DigitalInOut(board.D23)
 buttonA.switch_to_input(pull=digitalio.Pull.UP)
 buttonB = digitalio.DigitalInOut(board.D24)
 buttonB.switch_to_input(pull=digitalio.Pull.UP)
+DEBOUNCE_TIME = 0.2
 
 # Define the JSON-based menu structure
 menu_json = """
@@ -122,31 +123,37 @@ def exec_action(item):
         print(f"Executing {item['command']}")
         subprocess.run(item['command'], shell=True)
 
-# Menu control function
+# Menu control function with debouncing
 async def menu_control():
     global current_menu, current_index
+    last_buttonB_time = 0  # Last time Button B was pressed
     while True:
         buttonA_pressed = not buttonA.value
         buttonB_pressed = not buttonB.value
-        await asyncio.sleep(0.1)  # Debounce delay
-
+        current_time = time.monotonic()  # Get the current time
+        
         if buttonA_pressed:
             current_index = (current_index + 1) % len(current_menu + [{"text": "< Back"}] if menu_stack else current_menu)
             draw_menu(current_menu, current_index)
+        
         if buttonB_pressed:
-            if current_index == 0 and menu_stack:
-                current_menu, current_index = menu_stack.pop()
-                draw_menu(current_menu, current_index)
-            else:
-                adjusted_index = current_index - 1 if menu_stack else current_index
-                selected_item = current_menu[adjusted_index]
-                if "submenu" in selected_item:
-                    menu_stack.append((current_menu, current_index))
-                    current_menu = selected_item["submenu"]
-                    current_index = 0
+            if (current_time - last_buttonB_time) > DEBOUNCE_TIME:  # Check if sufficient time has passed
+                last_buttonB_time = current_time  # Update the last button press time
+                if current_index == 0 and menu_stack:
+                    current_menu, current_index = menu_stack.pop()
                     draw_menu(current_menu, current_index)
-                elif "command" in selected_item:
-                    exec_action(selected_item)
+                else:
+                    adjusted_index = current_index - 1 if menu_stack else current_index
+                    selected_item = current_menu[adjusted_index]
+                    if "submenu" in selected_item:
+                        menu_stack.append((current_menu, current_index))
+                        current_menu = selected_item["submenu"]
+                        current_index = 0
+                        draw_menu(current_menu, current_index)
+                    elif "command" in selected_item:
+                        exec_action(selected_item)
+        
+        await asyncio.sleep(0.1)  # Short delay for loop iteration
 
 async def main():
     draw_menu(current_menu, current_index)
