@@ -123,37 +123,43 @@ def exec_action(item):
         print(f"Executing {item['command']}")
         subprocess.run(item['command'], shell=True)
 
-# Menu control function with debouncing
+# Menu control function with edge detection
 async def menu_control():
     global current_menu, current_index
-    last_buttonB_time = 0  # Last time Button B was pressed
+    last_buttonA_state = True  # Assume buttons start unpressed (pulled up)
+    last_buttonB_state = True
+
     while True:
-        buttonA_pressed = not buttonA.value
-        buttonB_pressed = not buttonB.value
-        current_time = time.monotonic()  # Get the current time
-        
-        if buttonA_pressed:
+        buttonA_state = buttonA.value
+        buttonB_state = buttonB.value
+
+        # Detect falling edge for Button A (moving from not pressed to pressed)
+        if last_buttonA_state and not buttonA_state:
             current_index = (current_index + 1) % len(current_menu + [{"text": "< Back"}] if menu_stack else current_menu)
             draw_menu(current_menu, current_index)
         
-        if buttonB_pressed:
-            if (current_time - last_buttonB_time) > DEBOUNCE_TIME:  # Check if sufficient time has passed
-                last_buttonB_time = current_time  # Update the last button press time
-                if current_index == 0 and menu_stack:
-                    current_menu, current_index = menu_stack.pop()
+        # Detect rising edge for Button B (button release after press)
+        if not last_buttonB_state and buttonB_state:
+            if current_index == 0 and menu_stack:
+                current_menu, current_index = menu_stack.pop()
+                draw_menu(current_menu, current_index)
+            else:
+                adjusted_index = current_index - 1 if menu_stack else current_index
+                selected_item = current_menu[adjusted_index]
+                if "submenu" in selected_item:
+                    menu_stack.append((current_menu, current_index))
+                    current_menu = selected_item["submenu"]
+                    current_index = 0
                     draw_menu(current_menu, current_index)
-                else:
-                    adjusted_index = current_index - 1 if menu_stack else current_index
-                    selected_item = current_menu[adjusted_index]
-                    if "submenu" in selected_item:
-                        menu_stack.append((current_menu, current_index))
-                        current_menu = selected_item["submenu"]
-                        current_index = 0
-                        draw_menu(current_menu, current_index)
-                    elif "command" in selected_item:
-                        exec_action(selected_item)
-        
-        await asyncio.sleep(0.1)  # Short delay for loop iteration
+                elif "command" in selected_item:
+                    exec_action(selected_item)
+
+        # Update last known states
+        last_buttonA_state = buttonA_state
+        last_buttonB_state = buttonB_state
+
+        await asyncio.sleep(0.1)  # Short delay for loop iteration to prevent excessive CPU usage
+
 
 async def main():
     draw_menu(current_menu, current_index)
