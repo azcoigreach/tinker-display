@@ -64,6 +64,10 @@ def draw_menu(menu_items, selected_index):
     draw = ImageDraw.Draw(image)
     draw.rectangle((0, 0, disp.height, disp.width), outline=0, fill=0)
     
+    # Add a 'Back' option if in a submenu
+    if menu_stack:
+        menu_items = [{"text": "< Back"}] + menu_items
+    
     for i, item in enumerate(menu_items):
         text = item['text'] if 'text' in item else 'Unnamed Item'
         y_position = 30 + i * 20
@@ -89,20 +93,22 @@ async def menu_control():
         await asyncio.sleep(0.1)  # Debounce delay
 
         if buttonA_pressed:
-            current_index = (current_index + 1) % len(current_menu)
+            current_index = (current_index + 1) % len(current_menu + [{"text": "< Back"}] if menu_stack else current_menu)
             draw_menu(current_menu, current_index)
         if buttonB_pressed:
-            selected_item = current_menu[current_index]
-            if "submenu" in selected_item:
-                menu_stack.append((current_menu, current_index))
-                current_menu = selected_item["submenu"]
-                current_index = 0
-                draw_menu(current_menu, current_index)
-            elif "command" in selected_item:
-                exec_action(selected_item)
-            elif menu_stack:
+            if current_index == 0 and menu_stack:
                 current_menu, current_index = menu_stack.pop()
                 draw_menu(current_menu, current_index)
+            else:
+                adjusted_index = current_index - 1 if menu_stack else current_index
+                selected_item = current_menu[adjusted_index]
+                if "submenu" in selected_item:
+                    menu_stack.append((current_menu, current_index))
+                    current_menu = selected_item["submenu"]
+                    current_index = 0
+                    draw_menu(current_menu, current_index)
+                elif "command" in selected_item:
+                    exec_action(selected_item)
 
 async def main():
     draw_menu(current_menu, current_index)
