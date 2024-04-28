@@ -109,7 +109,7 @@ def draw_menu(menu_items, selected_index):
     
     for i, item in enumerate(menu_items):
         text = item['text'] if 'text' in item else 'Unnamed Item'
-        y_position = 30 + i * 20
+        y_position = i * 20
         if i == selected_index:
             draw.text((10, y_position), f"> {text}", font=font, fill="#00FFFF")
         else:
