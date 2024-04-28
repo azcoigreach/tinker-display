@@ -50,17 +50,27 @@ def draw_menu(selected_index):
 
     display.image(image)
 
+# Initialize last button state to be not pressed
+last_buttonA_state = False
+last_buttonB_state = False
+
 async def menu_control():
-    global current_index
+    global current_index, last_buttonA_state, last_buttonB_state
     while True:
-        if buttonA.value:
+        buttonA_pressed = buttonA.value and not last_buttonA_state
+        buttonB_pressed = buttonB.value and not last_buttonB_state
+
+        if buttonA_pressed:
             current_index = (current_index + 1) % len(menu_items)
             draw_menu(current_index)
-            await asyncio.sleep(0.2)  # Debounce delay
-        if buttonB.value:
+        if buttonB_pressed:
             execute_action(current_index)
-            await asyncio.sleep(0.2)  # Debounce delay
-        await asyncio.sleep(0.1)
+
+        # Update the last button states
+        last_buttonA_state = buttonA.value
+        last_buttonB_state = buttonB.value
+
+        await asyncio.sleep(0.1)  # Button check interval for debouncing
 
 def execute_action(index):
     # Placeholder for action execution logic
