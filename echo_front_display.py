@@ -77,24 +77,16 @@ while True:
         "AUX1G:192.168.0.101",
         "100G1:192.168.100.101",
         "100G2:192.168.200.101"
-]
+    ]
+
+    line_spacing = 20
 
     # Write four lines of text.
     y = top
     for i, line in enumerate(data):
-        draw.text((x, y), line, font=font, fill="#FFFFFF")
-        y += font.getbbox(line)[1]
+        draw.text((x, y), line, font=font, fill="#00FFFF")
+        y += font.getbbox(line)[1] + line_spacing
 
-
-    # draw.text((x, y), IP, font=font, fill="#FFFFFF")
-    # y += font.getbbox(IP)[1]
-    # draw.text((x, y), CPU, font=font, fill="#FFFF00")
-    # y += font.getbbox(CPU)[1]
-    # draw.text((x, y), MemUsage, font=font, fill="#00FF00")
-    # y += font.getbbox(MemUsage)[1]
-    # draw.text((x, y), Disk, font=font, fill="#0000FF")
-    # y += font.getbbox(Disk)[1]
-    # draw.text((x, y), Temp, font=font, fill="#FF00FF")
 
     # Display image.
     disp.image(image, rotation)
