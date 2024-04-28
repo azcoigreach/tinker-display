@@ -72,7 +72,7 @@ menu_json = """
             "command": "echo 'Sub Menu Item 5 selected'"
             }
         ]
-    }
+    },
     {
       "text": "Utilities",
       "submenu": [
