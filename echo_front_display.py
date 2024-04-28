@@ -2,24 +2,25 @@ import board
 import digitalio
 from PIL import Image, ImageDraw, ImageFont
 from adafruit_rgb_display import color565
-from adafruit_rgb_display.st7789 import ST7789
+from adafruit_rgb_display import st7789
 
 # Setup display
 cs_pin = digitalio.DigitalInOut(board.CE0)
 dc_pin = digitalio.DigitalInOut(board.D25)
 reset_pin = None
 BAUDRATE = 64000000
+spi = board.SPI()
 
-display = ST7789(
-    board.SPI(),
+disp = st7789.ST7789(
+    spi,
     cs=cs_pin,
     dc=dc_pin,
     rst=reset_pin,
     baudrate=BAUDRATE,
     width=135,
     height=240,
-    x_offset=0,
-    y_offset=80,
+    x_offset=53,
+    y_offset=40,
 )
 
 backlight = digitalio.DigitalInOut(board.D22)
