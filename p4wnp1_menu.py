@@ -84,10 +84,13 @@ def draw_menu(selected_index):
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
 
     for i, item in enumerate(menu_items):
+        # In draw_menu, change the line inside the loop to handle tuple:
         if i == selected_index:
-            draw.text((10, 30 + i*20), f"> {item}", font=font, fill="#00FFFF")
+            draw.text((10, 30 + i*20), f"> {item[0]}", font=font, fill="#00FFFF")  # Assume item is a tuple (displayText, command)
         else:
-            draw.text((10, 30 + i*20), item, font=font, fill="#00FFFF")
+            draw.text((10, 30 + i*20), item[0], font=font, fill="#00FFFF")  # Display only the first element of the tuple
+
+        # In exec_action, no change is needed as it already assumes item is a tuple and executes the second element.
 
     disp.image(image, rotation)
 
