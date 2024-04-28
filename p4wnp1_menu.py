@@ -81,11 +81,15 @@ menu_items = [
         "command": "P4wnP1_cli trigger send --group-name=payload --group-value=1"
     },
     {
+        "text": "System Info",
+        "command": "P4wnP1_cli trigger send --group-name=info --group-value=1"
+    },
+    {
         "text": "Utilities",
         "submenu": [
             {
-                "text": "Shutdown",
-                "command": "sudo shutdown now"
+            "text": "Shutdown",
+            "command": "sudo shutdown now"
             }
         ]
     }
