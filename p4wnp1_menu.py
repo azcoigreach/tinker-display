@@ -95,20 +95,22 @@ menu_items = [
     }
 ]
 current_index = 0
-current_index = 0
 
 def draw_menu(selected_index):
     # Draw a black filled box to clear the image.
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
 
     for i, item in enumerate(menu_items):
-        # In draw_menu, change the line inside the loop to handle tuple:
-        if i == selected_index:
-            draw.text((10, 30 + i*20), f"> {item[0]}", font=font, fill="#00FFFF")  # Assume item is a tuple (displayText, command)
+        if "submenu" in item:
+            if i == selected_index:
+                draw.text((10, 30 + i*20), f"> {item['text']}", font=font, fill="#00FFFF")
+            else:
+                draw.text((10, 30 + i*20), item['text'], font=font, fill="#00FFFF")
         else:
-            draw.text((10, 30 + i*20), item[0], font=font, fill="#00FFFF")  # Display only the first element of the tuple
-
-        # In exec_action, no change is needed as it already assumes item is a tuple and executes the second element.
+            if i == selected_index:
+                draw.text((10, 30 + i*20), f"> {item['text']}", font=font, fill="#00FFFF")
+            else:
+                draw.text((10, 30 + i*20), item['text'], font=font, fill="#00FFFF")
 
     disp.image(image, rotation)
 
