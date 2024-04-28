@@ -48,7 +48,11 @@ def draw_display():
     for i, line in enumerate(data):
         draw.text((10, 30 + i*20), line, font=font, fill=color565(0, 255, 255))
 
-    display.image(image)
+    # Rotate the image 90 degrees clockwise
+    rotated_image = image.rotate(-90, expand=True)
+
+    # Display the rotated image
+    display.image(rotated_image)
 
 def main():
     draw_display()
