@@ -1,5 +1,7 @@
 import asyncio
 import time
+import digitalio
+import board
 
 async def check_button(button, button_name, last_press_time):
     debounce_delay = 0.2
