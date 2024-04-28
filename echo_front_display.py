@@ -36,7 +36,7 @@ data = [
 # Font setup (adjust path as necessary)
 try:
     font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", 12)
-except IOError:
+except:
     font = ImageFont.load_default()  # Fallback to default font if DejaVu Mono not found
 
 def draw_display():
