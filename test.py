@@ -43,12 +43,20 @@ async def update_display():
 
 # Function to monitor button presses asynchronously
 async def check_buttons():
+    last_a_press = 0
+    last_b_press = 0
+    debounce_time = 0.2  # 200 milliseconds
+
     while True:
-        if buttonA.value:
+        now = time.monotonic()
+        if not buttonA.value and (now - last_a_press > debounce_time):
             print("Button A Pressed")
-        if buttonB.value:
+            last_a_press = now
+        if not buttonB.value and (now - last_b_press > debounce_time):
             print("Button B Pressed")
-        await asyncio.sleep(0.1)  # Check buttons every 100 ms
+            last_b_press = now
+        await asyncio.sleep(0.05)  # Check buttons every 50 ms
+
 
 # Main function to run the event loop
 async def main():
