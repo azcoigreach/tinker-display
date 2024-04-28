@@ -58,7 +58,7 @@ menu_json = """
             {
             "text": "Sub Menu Item 2",
             "command": "echo 'Sub Menu Item 2 selected'"
-            }
+            },
             {
             "text": "Sub Menu Item 3",
             "command": "echo 'Sub Menu Item 3 selected'"
