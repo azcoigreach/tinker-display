@@ -16,10 +16,10 @@ display = ST7789(
     dc=dc_pin,
     rst=reset_pin,
     baudrate=BAUDRATE,
-    width=135,
-    height=240,
-    x_offset=53,
-    y_offset=40,
+    width=240,
+    height=1350,
+    x_offset=0,
+    y_offset=80,
 )
 
 backlight = digitalio.DigitalInOut(board.D22)
@@ -49,7 +49,7 @@ def draw_display():
         draw.text((10, 30 + i*20), line, font=font, fill=color565(0, 255, 255))
 
     # Rotate the image 90 degrees clockwise
-    rotated_image = image.rotate(-90, expand=True)
+    rotated_image = image.rotate(180, expand=True)
 
     # Display the rotated image
     display.image(rotated_image)
