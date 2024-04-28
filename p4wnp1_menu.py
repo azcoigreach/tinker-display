@@ -5,6 +5,13 @@ import board
 import json
 from PIL import Image, ImageDraw, ImageFont
 from adafruit_rgb_display import st7789
+import logging
+
+# Setup logging
+logging.basicConfig(level=logging.INFO)
+
+# Setup command logger
+log = logging.getLogger("P4wnP1_Menu")
 
 # Configuration for display and hardware buttons
 cs_pin = digitalio.DigitalInOut(board.CE0)
@@ -132,7 +139,7 @@ def draw_menu(menu_items, selected_index):
 # Action execution function
 def exec_action(item):
     if "command" in item:
-        print(f"Executing {item['command']}")
+        log.info(f"Executing command: {item['command']}")
         subprocess.run(item['command'], shell=True)
 
 # Menu control function with edge detection
