@@ -24,8 +24,8 @@ menu_json = """
 {
   "Main Menu": [
     {
-      "text": "Network Scan",
-      "command": "P4wnP1_cli trigger send --group-name=scan --group-value=1"
+      "text": "Deploy HomeLab",
+      "command": "P4wnP1_cli template deploy --full 'HomeLab'"
     },
     {
       "text": "Deploy Payload",
@@ -35,6 +35,44 @@ menu_json = """
       "text": "System Info",
       "command": "P4wnP1_cli trigger send --group-name=info --group-value=1"
     },
+    {
+        "text": "Sub Menu",
+        "submenu": [
+            {
+            "text": "Sub Menu Item 1",
+            "command": "echo 'Sub Menu Item 1 selected'"
+            },
+            {
+            "text": "Sub Menu Item 2",
+            "command": "echo 'Sub Menu Item 2 selected'"
+            }
+        ]
+    },
+    {
+        "text": "Sub Menu 2",
+        "submenu": [
+            {
+            "text": "Sub Menu Item 1",
+            "command": "echo 'Sub Menu Item 1 selected'"
+            },
+            {
+            "text": "Sub Menu Item 2",
+            "command": "echo 'Sub Menu Item 2 selected'"
+            }
+            {
+            "text": "Sub Menu Item 3",
+            "command": "echo 'Sub Menu Item 3 selected'"
+            },
+            {
+            "text": "Sub Menu Item 4",
+            "command": "echo 'Sub Menu Item 4 selected'"
+            },
+            {
+            "text": "Sub Menu Item 5",
+            "command": "echo 'Sub Menu Item 5 selected'"
+            }
+        ]
+    }
     {
       "text": "Utilities",
       "submenu": [
