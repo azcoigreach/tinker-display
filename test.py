@@ -23,9 +23,9 @@ disp = st7789.ST7789(
 
 # Setup buttons
 buttonA = digitalio.DigitalInOut(board.D23)
-buttonA.switch_to_input(pull=digitalio.Pull.DOWN)
+buttonA.switch_to_input(pull=digitalio.Pull.UP)
 buttonB = digitalio.DigitalInOut(board.D24)
-buttonB.switch_to_input(pull=digitalio.Pull.DOWN)
+buttonB.switch_to_input(pull=digitalio.Pull.UP)
 
 # Function to update the display asynchronously
 async def update_display():
