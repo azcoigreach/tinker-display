@@ -60,7 +60,7 @@ x = 0
 # Alternatively load a TTF font.  Make sure the .ttf font file is in the
 # same directory as the python script!
 # Some other nice fonts to try: http://www.dafont.com/bitmap.php
-font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 24)
+font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", 24)
 
 # Turn on the backlight
 backlight = digitalio.DigitalInOut(board.D22)
@@ -87,13 +87,13 @@ while True:
     # Write four lines of text.
     y = top
     draw.text((x, y), IP, font=font, fill="#FFFFFF")
-    y += font.getsize(IP)[1] + padding
+    y += font.getbbox(IP)[1]
     draw.text((x, y), CPU, font=font, fill="#FFFF00")
-    y += font.getsize(CPU)[1] + padding
+    y += font.getbbox(CPU)[1]
     draw.text((x, y), MemUsage, font=font, fill="#00FF00")
-    y += font.getsize(MemUsage)[1] + padding
+    y += font.getbbox(MemUsage)[1]
     draw.text((x, y), Disk, font=font, fill="#0000FF")
-    y += font.getsize(Disk)[1] + padding
+    y += font.getbbox(Disk)[1]
     draw.text((x, y), Temp, font=font, fill="#FF00FF")
 
     # Display image.
