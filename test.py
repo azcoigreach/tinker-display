@@ -3,6 +3,7 @@ import board
 import digitalio
 from PIL import Image, ImageDraw
 import adafruit_rgb_display.st7789 as st7789  # Adjust based on your display driver
+import time
 
 # Setup for display
 cs_pin = digitalio.DigitalInOut(board.CE0)
