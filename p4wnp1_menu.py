@@ -32,66 +32,22 @@ menu_json = """
 {
   "Main Menu": [
     {
-      "text": "Deploy HomeLab",
-      "command": "P4wnP1_cli template deploy --full HomeLab"
+      "text": "Payloads",
+      "submenu": [
+        {
+          "text": "Deploy Default Payload",
+          "command": "P4wnP1_cli template deploy --full startup"
+        },
+      ]
     },
     {
-      "text": "Deploy Payload",
-      "command": "P4wnP1_cli trigger send --group-name=payload --group-value=1"
-    },
-    {
-      "text": "System Info",
-      "command": "P4wnP1_cli trigger send --group-name=info --group-value=1"
-    },
-    {
-        "text": "Sub Menu",
-        "submenu": [
-            {
-            "text": "Sub Menu Item 1",
-            "command": "echo 'Sub Menu Item 1 selected'"
-            },
-            {
-            "text": "Sub Menu Item 2",
-            "command": "echo 'Sub Menu Item 2 selected'"
-            }
-        ]
-    },
-    {
-        "text": "Sub Menu 2",
-        "submenu": [
-            {
-            "text": "Sub Menu Item 1",
-            "command": "echo 'Sub Menu Item 1 selected'"
-            },
-            {
-            "text": "Sub Menu Item 2",
-            "command": "echo 'Sub Menu Item 2 selected'"
-            },
-            {
-            "text": "Sub Menu Item 3",
-            "command": "echo 'Sub Menu Item 3 selected'"
-            },
-            {
-            "text": "Sub Menu Item 4",
-            "command": "echo 'Sub Menu Item 4 selected'"
-            },
-            {
-            "text": "Sub Menu Item 5",
-            "command": "echo 'Sub Menu Item 5 selected'"
-            },
-            {
-            "text": "Sub Menu Item 6",
-            "command": "echo 'Sub Menu Item 6 selected'"
-            },
-            {
-            "text": "Sub Menu Item 7",
-            "command": "echo 'Sub Menu Item 7 selected'"
-            },
-            {
-            "text": "Sub Menu Item 8",
-            "command": "echo 'Sub Menu Item 8 selected'"
-            }
-        ]
+      "text": "Triggers",
+      "submenu": [
+        {
+          "text": "Deploy Payload",
+          "command": "P4wnP1_cli trigger send --group-name=blink --group-value=1"
+        },
+      ]
     },
     {
       "text": "Utilities",
